@@ -14,13 +14,8 @@ const userSchema = joi.object({
 
 const userValidationSchema = (req, res, next) => {
 	const registry = req.body;
-	if (
-		registry.name &&
-		registry.email &&
-		registry.street &&
-		registry.city &&
-		registry.state
-	) {
+	const firstValidation = userSchema.validate(registry, { abortEarly: false });
+	if (!firstValidation.error) {
 		registry.name = stripHtml(registry.name).result.trim();
 		registry.email = stripHtml(registry.email).result.trim();
 		registry.street = stripHtml(registry.street).result.trim();
