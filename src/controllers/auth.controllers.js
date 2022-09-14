@@ -31,4 +31,6 @@ const signUp = async (req, res) => {
 		res.status(500).send("Falha ao conectar com o servidor!");
 	}
 };
+
+
 export { signUp };
