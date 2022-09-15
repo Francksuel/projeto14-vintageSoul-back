@@ -50,7 +50,7 @@ const signIn = async (req, res) => {
 		});
 
 	} catch (error) {
-		return res.status(500).send("Falha ao conectar com o servidor!");
+		return res.status(500).send(error.message);
 	}
 } 
 
