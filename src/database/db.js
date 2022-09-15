@@ -8,7 +8,7 @@ const mongo = async () => {
 	let db;
 
 		mongoClient.connect().then(() => {
-			db = mongoClient.db("vintagesoul");
+			db = mongoClient.db("vintage-soul-store");
 		});
 };
 export { mongo };
