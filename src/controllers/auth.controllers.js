@@ -29,7 +29,7 @@ const signUp = async (req, res) => {
 		});
 		res.status(201).send("Usuário registrado com sucesso!");
 	} catch {
-		res.status(500).send("Falha ao conectar com o servidor");
+		res.status(500).send("Falha ao conectar com o servidor!");
 	}
 };
 
