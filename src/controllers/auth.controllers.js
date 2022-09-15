@@ -25,11 +25,33 @@ const signUp = async (req, res) => {
 	} catch (error) {
 		return res.status(500).send(error.message);
 	}
-
 };
 
 const signIn = async (req, res) => {
-	res.send("ola");
+	const signInObject = res.locals.signIn
+	const token = uuid();
+	
+	try {
+	const user = await db.collection("users").findOne({email: signInObject.email});
+
+	if(!user) return res.status(401).send("Usuário e/ou senha inválidos");
+
+	const isCorrectPassword = await bcrypt.compare(signInObject.password, user.password);
+
+	if(!isCorrectPassword) return res.status(401).send("Usuário e/ou senha inválidos");
+
+		await db.collection("sessions").insertOne({
+			userId: user._id,
+			token
+		});
+		return res.status(200).send({
+			name: user.name,
+			token
+		});
+
+	} catch (error) {
+		return res.status(500).send("Falha ao conectar com o servidor!");
+	}
 } 
 
 export { signUp, signIn };
