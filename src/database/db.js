@@ -6,10 +6,12 @@ dotenv.config();
 const mongoClient = new MongoClient(process.env.MONGO_URI);
 const mongo = async () => {
 	let db;
-
-		mongoClient.connect().then(() => {
-			db = mongoClient.db("vintage-soul-store");
-		});
+	try {
+		db = await mongoClient.db("vintage-soul-store");
+		return db;
+	} catch (error) {
+		return error;
+	}
 };
 export { mongo };
 
