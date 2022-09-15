@@ -36,7 +36,7 @@ const signIn = async (req, res) => {
 
 	if(!user) return res.status(401).send("Usuário e/ou senha inválidos");
 
-	const isCorrectPassword = await bcrypt.compare(signInObject.password, user.password);
+	const isCorrectPassword = await bcrypt.compare(signInObject.password, user.passwordHash);
 
 	if(!isCorrectPassword) return res.status(401).send("Usuário e/ou senha inválidos");
 
