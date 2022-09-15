@@ -14,6 +14,6 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
 	res.send("ola");
-}
+} 
 
 export { signUp, signIn };
