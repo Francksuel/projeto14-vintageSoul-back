@@ -8,10 +8,12 @@ await mongoClient.connect();
 const mongo = async () => {
 	let db;
 	try {
-		db = await mongoClient.db("vintagesoul");
+		db = await mongoClient.db("vintage-soul-store");
 		return db;
 	} catch (error) {
 		return error;
 	}
 };
 export { mongo };
+
+
