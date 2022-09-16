@@ -9,8 +9,4 @@ authRouter.post("/sign-up", userValidationSchema, signUp);
 
 authRouter.post("/sign-in", signInValidationSchema, signIn);
 
-authRouter.get("/", (req, res) => {
-    res.send("Hello");
-});
-
 export { authRouter };
