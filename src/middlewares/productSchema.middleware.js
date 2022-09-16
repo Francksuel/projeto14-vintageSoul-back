@@ -23,7 +23,7 @@ const productValidationSchema = (req, res, next) => {
         return res.status(422).send(errors);
     };
 
-    res.local.product = product;
+    res.locals.product = product;
     next();
 };
 
