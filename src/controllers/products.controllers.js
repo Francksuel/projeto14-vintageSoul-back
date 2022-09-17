@@ -14,12 +14,14 @@ const postProduct = async (req, res) => {
 };
 
 const getProducts = async (req, res) => {
+    const limit = req.query.limit;
+    const start = 12*(limit-1);
+    const end = limit*12;
+
     try {
         const products = await db.collection("products").find().toArray();
 
-        if(products.length < 1) res.stauts(404).send("Não há produtos cadastrados");
-
-        res.status(200).send(products);
+        res.status(200).send(products.reverse().slice(start, end));
     } catch (error) {
         res.status(500).send(error.message);
     }
