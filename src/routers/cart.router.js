@@ -5,5 +5,4 @@ const cartRouter = express.Router();
 
 cartRouter.get("/cart", checkUser,getCart);
 
-
 export { cartRouter };
