@@ -20,7 +20,7 @@ const userValidationSchema = (req, res, next) => {
 		const errors = userValidation.error.details
 			.map((error) => error.message)
 			.join(" & ");
-		return res.status(422).send(errors);
+		return res.status(422).send(errors); 
 	}
 	res.locals.registry = registry;
 	next();
