@@ -1,0 +1,35 @@
+const finalizePurchase = async (req, res) => {
+	const userId = res.locals.userId;
+	try {
+		const userProducts = await db
+			.collection("cart")
+			.find({ userId: res.locals.userId })
+			.toArray();
+        userProducts.forEach(async(element) => {
+            const product = await db
+			.collection("products")
+			.findOne({ _id: ObjectId(element.idProduct) });
+		if (!product) {
+			return res.status(404).send("Produto não encontrado!");
+		}
+		if (product.inventory < element.quantity) {
+			return res.status(400).send("Quantidade acima do inventário");
+		}
+		const newInventory = Number(product.inventory - Number(element.quantity));
+		await db.collection("products").updateOne(
+			{ _id: ObjectId(element.idProduct) },
+			{
+				$set: {
+					inventory: newInventory,
+				},
+			}
+		);
+        });
+		await db.collection("cart").deleteMany({ userId: userId });
+		const result = await db.collection("sales").insertOne(userProducts);
+		res.send(result.insetedId);		
+	} catch (error) {
+		res.status(500).send(error.message);
+	}
+};
+export { finalizePurchase };
