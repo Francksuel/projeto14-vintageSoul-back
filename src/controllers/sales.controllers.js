@@ -5,7 +5,6 @@ const db = await mongo();
 
 const finalizePurchase = async (req, res) => {
 	const userId = res.locals.userId;
-	const  total  = req.body;
 	try {
 		const user = await db
 			.collection("users")
@@ -37,7 +36,7 @@ const finalizePurchase = async (req, res) => {
 		await db.collection("cart").deleteMany({ userId: userId });
 		const result = await db
 			.collection("sales")
-			.insertOne({...userProducts, address: user.address, total, userId});
+			.insertOne({...userProducts, address: user.address, userId});
 		res.send(result.insetedId);
 	} catch (error) {
 		res.status(500).send(error.message);
