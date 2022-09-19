@@ -34,8 +34,18 @@ const deleteItemCart = async (req, res) => {
 		const item = await db.collection("cart").deleteOne({_id: new ObjectId(idItem)});
 		return res.status(200).send("Item deletado do carrinho com sucesso")
 	} catch (error) {
-		res.status(500).send("ops")
+		res.status(500).send(error.message)
 	}
-}
+};
 
-export { getCart, postCart, deleteItemCart };
+const deleteUserCart = async (req, res) => {
+	const userId = res.locals.userId
+	try {
+		 await db.collection("cart").deleteMany({ userId: userId })
+		 return res.status(200).send("Carrinho esvaziado com sucesso");
+	} catch (error) {
+		res.status(500).send(error.message);
+	}
+};
+
+export { getCart, postCart, deleteItemCart, deleteUserCart };
