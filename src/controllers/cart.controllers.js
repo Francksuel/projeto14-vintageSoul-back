@@ -13,5 +13,15 @@ const getCart = async (req, res) => {
 		res.status(500).send(error.message);
 	}
 };
+const postCart = async (req, res) => {
+	const userId = res.locals.userId;
+	const product = req.body;
+	try {
+		await db.collection("cart").insertOne({...product, userId});
+		res.status(201).send("Adicionado ao carrinho com sucesso");
+	} catch (error) {
+		res.status(500).send(error.message);
+	}
+};
 
-export { getCart };
+export { getCart, postCart };
