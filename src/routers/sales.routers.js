@@ -4,6 +4,6 @@ import { checkUser } from "../middlewares/authorization.middleware";
 
 const salesRouter = express.Router();
 
-salesRouter.post("/sales",checkUser,finalizePurchase);
+salesRouter.post("/sales", checkUser, finalizePurchase);
 
 export { salesRouter };

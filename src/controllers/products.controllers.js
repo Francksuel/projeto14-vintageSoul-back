@@ -26,4 +26,4 @@ const getProducts = async (req, res) => {
 	}
 };
 
-export { postProduct, getProducts};
+export { postProduct, getProducts };
