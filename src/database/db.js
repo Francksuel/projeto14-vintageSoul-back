@@ -15,5 +15,3 @@ const mongo = async () => {
 	}
 };
 export { mongo };
-
-

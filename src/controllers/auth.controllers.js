@@ -8,9 +8,11 @@ const signUp = async (req, res) => {
 	const registry = res.locals.registry;
 
 	try {
-		const emailInUse = await db.collection("users").findOne({email: registry.email});
+		const emailInUse = await db
+			.collection("users")
+			.findOne({ email: registry.email });
 
-		if(emailInUse) return res.status(409).send("Email já cadastrado");
+		if (emailInUse) return res.status(409).send("Email já cadastrado");
 
 		const passwordHash = bcrypt.hashSync(registry.password, 10);
 
