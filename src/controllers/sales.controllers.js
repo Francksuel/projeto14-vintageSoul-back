@@ -5,14 +5,14 @@ const db = await mongo();
 
 const finalizePurchase = async (req, res) => {
 	const userId = res.locals.userId;
-	const { total } = req.body;
+	const  total  = req.body;
 	try {
 		const user = await db
 			.collection("users")
-			.findOne({ _id: ObjectId(userId) });
+			.findOne({ _id: userId });
 		const userProducts = await db
 			.collection("cart")
-			.find({ userId: res.locals.userId })
+			.find({ userId: userId })
 			.toArray();
 		userProducts.forEach(async (element) => {
 			const product = await db
@@ -37,7 +37,7 @@ const finalizePurchase = async (req, res) => {
 		await db.collection("cart").deleteMany({ userId: userId });
 		const result = await db
 			.collection("sales")
-			.insertOne(...userProducts, user.address, total, userId);
+			.insertOne({...userProducts, address: user.address, total, userId});
 		res.send(result.insetedId);
 	} catch (error) {
 		res.status(500).send(error.message);
