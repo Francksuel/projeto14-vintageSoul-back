@@ -1,6 +1,6 @@
 import express from "express";
-import { finalizePurchase } from "../controllers/sales.controllers";
-import { checkUser } from "../middlewares/authorization.middleware";
+import { finalizePurchase } from "../controllers/sales.controllers.js";
+import { checkUser } from "../middlewares/authorization.middleware.js";
 
 const salesRouter = express.Router();
 

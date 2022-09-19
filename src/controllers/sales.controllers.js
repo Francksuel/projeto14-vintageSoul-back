@@ -1,3 +1,8 @@
+import { ObjectId } from "mongodb";
+import { mongo } from "../database/db.js";
+
+const db = await mongo();
+
 const finalizePurchase = async (req, res) => {
 	const userId = res.locals.userId;
 	const { total } = req.body;
