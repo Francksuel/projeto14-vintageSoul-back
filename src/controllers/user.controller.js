@@ -1,5 +1,6 @@
 import { mongo } from "../database/db.js";
 import joi from "joi";
+import { stripHtml } from "string-strip-html";
 
 const db = await mongo();
 
